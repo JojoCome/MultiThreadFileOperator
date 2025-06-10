@@ -17,13 +17,16 @@ import java.util.concurrent.atomic.*;
 public class FileProcessor {
     private final String rootPath;
     private final ExecutorService executor = Executors.newFixedThreadPool(4);
-    private StatsCollector  statsCollector = new StatsCollector(executor);
+    private StatsCollector statsCollector = new StatsCollector(executor);
+
+    public FileProcessor(String rootPath) {
+        this.rootPath = rootPath;
+    }
     /*根据给定的路径字符串rootPath,创建一个File对象root,代表一个目录或文件
      * 不会立刻访问磁盘文件是否存在,只是创建一个抽象表示
      *后面的判断是:路径合法性检查,确保我们输入的路径是一个存在的目录,否则就终止程序运行
      * */
-        this.rootPath = rootPath;
-    }
+
 
     public void processFiles() {
         FileScanTask fileScanTask = new FileScanTask();
